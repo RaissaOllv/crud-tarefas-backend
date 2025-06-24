@@ -40,3 +40,7 @@ app.delete('/tarefas/:id', (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+
+app.get('/', (req, res) => {
+  res.send('API Crud Tarefas está rodando!');
+});
