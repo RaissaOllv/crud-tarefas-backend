@@ -4,7 +4,7 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(cors({ origin: 'https://crud-tarefas.vercel.app' }));
+app.use(cors());  // Liberando CORS para qualquer origem - para testar
 app.use(express.json());
 
 const DB_PATH = './db.json';
@@ -12,6 +12,10 @@ const DB_PATH = './db.json';
 function getTarefas() {
   return JSON.parse(fs.readFileSync(DB_PATH));
 }
+
+app.get('/', (req, res) => {
+  res.send('API Crud Tarefas está rodando!');
+});
 
 app.get('/tarefas', (req, res) => {
   res.json(getTarefas());
@@ -40,7 +44,3 @@ app.delete('/tarefas/:id', (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
-
-app.get('/', (req, res) => {
-  res.send('API Crud Tarefas está rodando!');
-});
